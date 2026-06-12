@@ -680,7 +680,7 @@ This README summarizes the three plots comparing continual backpropagation varia
 
 ## Accuracy
 
-![Accuracy](Assets/Accuracy.png)
+![Accuracy](assets/Accuracy.png)
 
 The accuracy plot shows each method's accuracy relative to a retrained network as the number of classes increases. Values above the dashed zero line mean the method performs better than the retrained-network baseline, while values below zero mean it performs worse.
 
@@ -688,7 +688,7 @@ CBP Tanh stays the most stable as the number of classes grows, remaining close t
 
 ## Stable Rank of the Representation
 
-![Rank](Assets/Rank.png)
+![Rank](assets/Rank.png)
 
 The stable-rank plot measures how much of the representation space remains effectively used by the network. A higher stable rank means the learned representation is richer and less collapsed.
 
@@ -696,7 +696,7 @@ CBP Tanh maintains the highest and most stable representation rank across the cl
 
 ## Dormant Neurons
 
-![Dormant Neurons](Assets/DormantNeurons.png)
+![Dormant Neurons](assets/DormantNeurons.png)
 
 The dormant-neurons plot shows the percentage of neurons that become inactive as the number of classes increases. A higher percentage means more neurons stop contributing meaningfully to the network.
 
