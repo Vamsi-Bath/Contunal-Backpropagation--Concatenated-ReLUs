@@ -666,3 +666,42 @@ The invariance metric is intended to measure whether hidden features remain stab
 * CIFAR invariance is computed on normalized image tensors, using spatial transforms that preserve the tensor shape.
 * MNIST invariance reshapes flattened vectors back to image form, applies transforms, and then flattens them again.
 
+
+# Continual Backpropagation Results
+
+This README summarizes the three plots comparing continual backpropagation variants across an increasing number of classes.
+
+## Legend
+
+- **Blue:** CBP Tanh
+- **Yellow:** CBP CReLU
+- **Green:** CBP ReLU
+- **Red:** BP ReLU
+
+## Accuracy
+
+![Accuracy](Accuracy.png)
+
+The accuracy plot shows each method's accuracy relative to a retrained network as the number of classes increases. Values above the dashed zero line mean the method performs better than the retrained-network baseline, while values below zero mean it performs worse.
+
+CBP Tanh stays the most stable as the number of classes grows, remaining close to or slightly above the retrained-network baseline. CBP CReLU and CBP ReLU start similarly but gradually lose performance as more classes are added. BP ReLU drops the most, showing the largest accuracy degradation at higher class counts.
+
+## Stable Rank of the Representation
+
+![Rank](Rank.png)
+
+The stable-rank plot measures how much of the representation space remains effectively used by the network. A higher stable rank means the learned representation is richer and less collapsed.
+
+CBP Tanh maintains the highest and most stable representation rank across the class range. CBP ReLU and CBP CReLU remain relatively stable but slightly lower. BP ReLU declines sharply as the number of classes increases, suggesting that standard backpropagation with ReLU suffers from representation collapse in this setting.
+
+## Dormant Neurons
+
+![Dormant Neurons](DormantNeurons.png)
+
+The dormant-neurons plot shows the percentage of neurons that become inactive as the number of classes increases. A higher percentage means more neurons stop contributing meaningfully to the network.
+
+CBP Tanh has the lowest dormant-neuron percentage and remains nearly flat, indicating that most neurons stay active. CBP CReLU also keeps dormancy low, though slightly higher than CBP Tanh. CBP ReLU accumulates many dormant neurons as the task becomes harder. BP ReLU has the highest dormant-neuron percentage, showing that many neurons become inactive under standard backpropagation.
+
+## Summary
+
+Across all three plots, CBP Tanh is the most stable method. It maintains accuracy, keeps representation rank high, and prevents neurons from becoming dormant. CBP CReLU and CBP ReLU are more stable than BP ReLU, but they still show some degradation as the number of classes increases. BP ReLU performs the worst overall, with declining accuracy, reduced representation rank, and a large increase in dormant neurons.
