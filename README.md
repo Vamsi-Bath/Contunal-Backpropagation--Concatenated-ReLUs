@@ -399,22 +399,7 @@ self.resgnt = ResGnT(
     device=self.device,
 )
 ```
-
-During training, the forward pass collects intermediate features:
-
-```python
-current_features = [] if self.use_cbp else None
-predictions = self.net.forward(image, current_features)
-```
-
-After the optimizer update, the generate-and-test step is applied:
-
-```python
-if self.use_cbp:
-    self.resgnt.gen_and_test(current_features)
-```
-
-### CReLU-specific ResGnT handling
+### CReLU ResGnT handling
 
 CReLU doubles activation channels, but the underlying convolutional filters should still be treated as the base units. The ResNet generate-and-test implementation handles this explicitly.
 
